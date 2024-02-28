@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
@@ -12,13 +13,15 @@ public class AnimateHandOnInput : MonoBehaviour
     public Animator handAnimator;
 	[SerializeField] private GameObject sword;
 	[SerializeField] private GameObject ninjaStar;
-	private bool holdingThrowable;
+	private Vector3 gripPoint;
+	private bool isGrabbed;
+	private GameObject instantiatedPrefab;
+	private float throwForce = 5.0f;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		holdingThrowable = false;
-
+		isGrabbed = false;
 	}
 
     // Update is called once per frame
@@ -45,14 +48,30 @@ public class AnimateHandOnInput : MonoBehaviour
 		}
 
 		//active ninja star pinch
-		if (triggerValue > 0.9f && gripValue < 0.1f && !holdingThrowable)
+		if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
 		{
-			GameObject instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
-			holdingThrowable = true;
+			instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
+			gripPoint = instantiatedPrefab.transform.GetChild(0).position;
+			instantiatedPrefab.transform.position = transform.position;
+			isGrabbed = true;
+
 		}
-		else
+
+		if(isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
 		{
-			holdingThrowable = false;
+			ThrowObject();
+			Debug.Log("gonna throw");
+			isGrabbed = false;
+
 		}
+
+	}
+
+	private void ThrowObject()
+	{
+		Debug.Log("thrown");
+		Rigidbody rb = instantiatedPrefab.GetComponent<Rigidbody>();
+		//rb.isKinematic = false;
+		rb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
 	}
 }

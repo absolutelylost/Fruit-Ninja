@@ -6,9 +6,14 @@ using UnityEngine;
 public class FruitBehavior : MonoBehaviour
 {
     private int hitPoints;
+	private Vector3[] strikePoints;
+	private Vector3[] strikePointsNormals;
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		Debug.Log("hit");
+		strikePoints[0] = collision.contacts[0].point;
+		Debug.Log(collision.contactCount);
 		if(collision.collider.transform.name == "sword")
 		{
 			hitPoints -= 2;
@@ -20,13 +25,25 @@ public class FruitBehavior : MonoBehaviour
 			Debug.Log("hit with star");
 
 		}
-		if (hitPoints == 0) Destroy(gameObject);
+		if (hitPoints <= 0) Destroy(gameObject);
+	}
+	private void OnCollisionExit(Collision collision)
+	{
+		strikePoints[1] = collision.contacts[0].point;
+
+		Debug.Log(collision.contactCount);
+		Debug.DrawLine(strikePoints[0], strikePoints[1], Color.red);
+		
+
+		strikePoints = new Vector3[strikePoints.Length];
 	}
 
 	// Start is called before the first frame update
 	void Start()
     {
-        switch (gameObject.name)
+		strikePoints = new Vector3[2];
+
+		switch (gameObject.name)
         {
 			case "apple":
 				hitPoints = 5;
@@ -59,6 +76,11 @@ public class FruitBehavior : MonoBehaviour
 				hitPoints = 10;
 				break;
 		}
+	}
+
+	private void DrawLine(Vector3 entryPoint, Vector3 exitPoint)
+	{
+		Debug.DrawLine(entryPoint, exitPoint);
 	}
 
     // Update is called once per frame
