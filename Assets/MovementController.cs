@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
 	[SerializeField] private CharacterController cc;
 
 	public InputActionProperty leftHandGripMoveAction;
-	private float moveSpeed = 5.0f;
+	private float moveSpeed = 4.0f;
     private bool activeMovement;
 	private Vector3 startingHeadPosition;
 	private Vector3 currentHeadPosition;
