@@ -63,7 +63,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5541170412985030261}
   - {fileID: 144159328115170300}
   m_Father: {fileID: 5541992472854802033}
   m_RootOrder: 2
@@ -767,77 +766,6 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
---- !u!1001 &5541992473429256959
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5541992472864116778}
-    m_Modifications:
-    - target: {fileID: 1902420336963186, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_Name
-      value: Prefab_Sword_Cyber_Nightstrike
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902420336963186, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.028
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.129
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6489924
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.1755069
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.713367
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.19777204
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -3.116
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -94.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -30.521
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
---- !u!4 &5541170412985030261 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4272613857901706, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-  m_PrefabInstance: {fileID: 5541992473429256959}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5543894820747363469 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1902420336963186, guid: 0a3f086a470be0d41b7e88530979e32a, type: 3}
-  m_PrefabInstance: {fileID: 5541992473429256959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5541992473430879566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -966,7 +894,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1060,7 +988,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   handAnimator: {fileID: 144159328122434602}
-  sword: {fileID: 5543894820747363469}
+  sword: {fileID: 0}
   ninjaStar: {fileID: 5601616656068263890, guid: 2a2920211544bdc43ad7e4ded8e6226d, type: 3}
 --- !u!4 &144159328115170300 stripped
 Transform:
