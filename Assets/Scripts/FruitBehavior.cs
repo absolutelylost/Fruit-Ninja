@@ -12,6 +12,8 @@ public class FruitBehavior : MonoBehaviour
 	private Vector3[] strikePointsNormals;
 	private Vector3 movementDirection;
 
+	[SerializeField] private GameObject fruitAttack;
+
 	private void OnCollisionEnter(Collision collision)
 	{
 		Debug.Log("hit");

@@ -27,14 +27,14 @@ public class FinisherAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            finisherInProgress = true;
-        }
-        if (finisherInProgress)
-        {
-            FinisherMoveAction();
-        }
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        //{
+        //    finisherInProgress = true;
+        //}
+        //if (finisherInProgress)
+        //{
+        //    FinisherMoveAction();
+        //}
     }
 
     public void FinisherMoveAction()
@@ -50,12 +50,6 @@ public class FinisherAttack : MonoBehaviour
 
             // Apply the new scale to the object
             fruit.transform.localScale = newScale;
-            Debug.Log(fruit.name);
-
-            Debug.Log(newScale);
-            Debug.Log(newScale.x <= 20);
-
-            Debug.Log(finisherInProgress);
 
             // Pass the color to the shader if it has a property for it
             //objectMaterial.SetColor("_CustomColor", objectMaterial.color);

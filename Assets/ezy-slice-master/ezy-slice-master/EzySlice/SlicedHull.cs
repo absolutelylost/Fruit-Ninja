@@ -25,7 +25,7 @@ namespace EzySlice {
             GameObject newObject = CreateUpperHull();
 
             if (newObject != null) {
-                newObject.transform.localPosition = original.transform.localPosition;
+                newObject.transform.localPosition = original.transform.position;
                 newObject.transform.localRotation = original.transform.localRotation;
                 newObject.transform.localScale = original.transform.localScale;
 
