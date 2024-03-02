@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-public class SweetsBehavior : MonoBehaviour
+public class Pickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // This function is called when another collider enters the trigger collider
+    //attached to this GameObject
+private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Destroy the item after it's collision triggered
+        Destroy(gameObject);
     }
 }
