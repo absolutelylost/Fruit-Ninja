@@ -11,18 +11,19 @@ public class AnimateHandOnInput : MonoBehaviour
     public InputActionProperty pinchAnimationAction;
     public InputActionProperty gripAnimationAction;
     public Animator handAnimator;
-    [SerializeField] private GameObject sword;
-    [SerializeField] private GameObject ninjaStar;
-    private Vector3 gripPoint;
-    private bool isGrabbed;
-    private GameObject instantiatedPrefab;
-    private float throwForce = 5.0f;
+	[SerializeField] private GameObject sword;
+	[SerializeField] private GameObject ninjaStar;
+	private Vector3 gripPoint;
+	private bool isGrabbed;
+	private GameObject instantiatedPrefab;
+	private float throwForce = 5.0f;
+	private Vector3 throwingVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        isGrabbed = false;
-    }
+		isGrabbed = false;
+	}
 
     // Update is called once per frame
     void Update()
@@ -47,31 +48,35 @@ public class AnimateHandOnInput : MonoBehaviour
             sword.SetActive(false);
         }
 
-        //active ninja star pinch
-        if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
-        {
-            instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
-            gripPoint = instantiatedPrefab.transform.GetChild(0).position;
-            instantiatedPrefab.transform.position = transform.position;
-            isGrabbed = true;
+		//active ninja star pinch
+		if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
+		{
+			if (ninjaStar == null) return;
+			//instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
+			//gripPoint = instantiatedPrefab.transform.GetChild(0).position;
+			//instantiatedPrefab.transform.position = transform.position;
+			ninjaStar.SetActive(true);
+			isGrabbed = true;
+		}
+		else
+		{
+			if (ninjaStar == null) return;
+			ninjaStar.SetActive(false);
+		}
 
-        }
+		if (isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
+		{
+			//ThrowObject();
+			isGrabbed = false;
+		}
 
-        if (isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
-        {
-            ThrowObject();
-            Debug.Log("gonna throw");
-            isGrabbed = false;
+	}
 
-        }
-
-    }
-
-    private void ThrowObject()
-    {
-        Debug.Log("thrown");
-        Rigidbody rb = instantiatedPrefab.GetComponent<Rigidbody>();
-        //rb.isKinematic = false;
-        rb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
-    }
+	private void ThrowObject()
+	{
+		Rigidbody rb = ninjaStar.GetComponent<Rigidbody>();
+		throwingVelocity = rb.velocity;
+		//rb.isKinematic = false;
+		rb.AddForce(throwingVelocity * throwForce, ForceMode.Impulse);
+	}
 }
