@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -13,20 +14,27 @@ public class AnimateHandOnInput : MonoBehaviour
     public Animator handAnimator;
 	[SerializeField] private GameObject sword;
 	[SerializeField] private GameObject ninjaStar;
+	[SerializeField] private TextMeshProUGUI StarValue;
+
 	private Vector3 gripPoint;
-	private bool isGrabbed;
+	private bool isGrabbed = false;
 	private GameObject instantiatedPrefab;
 	private float throwForce = 5.0f;
 	private Vector3 throwingVelocity;
+	public int numThrowingStars;
 
 	// Start is called before the first frame update
 	void Start()
     {
 		isGrabbed = false;
+		StarValue.text = numThrowingStars.ToString();
+		ninjaStar.SetActive(false);
+		sword.SetActive(false);
+
 	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         //right as bool for push or not
         float triggerValue = pinchAnimationAction.action.ReadValue<float>();
@@ -51,6 +59,7 @@ public class AnimateHandOnInput : MonoBehaviour
 		//active ninja star pinch
 		if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
 		{
+			Debug.Log("star");
 			if (ninjaStar == null) return;
 			//instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
 			//gripPoint = instantiatedPrefab.transform.GetChild(0).position;
@@ -58,15 +67,10 @@ public class AnimateHandOnInput : MonoBehaviour
 			ninjaStar.SetActive(true);
 			isGrabbed = true;
 		}
-		else
-		{
-			if (ninjaStar == null) return;
-			ninjaStar.SetActive(false);
-		}
 
-		if (isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
+		if (isGrabbed && triggerValue <= 0.01f && gripValue <= 0.1f)
 		{
-			//ThrowObject();
+			ThrowObject();
 			isGrabbed = false;
 		}
 
@@ -74,6 +78,7 @@ public class AnimateHandOnInput : MonoBehaviour
 
 	private void ThrowObject()
 	{
+		Debug.Log("thrown");
 		Rigidbody rb = ninjaStar.GetComponent<Rigidbody>();
 		throwingVelocity = rb.velocity;
 		//rb.isKinematic = false;
