@@ -22,22 +22,28 @@ public class AnimateHandOnInput : MonoBehaviour
 	private float throwForce = 5.0f;
 	private Vector3 throwingVelocity;
 	public int numThrowingStars;
+	public Vector3 velocity;
+	private Vector3 currentHandPosition;
+	private Vector3 previousHandPosition;
+
 
 	// Start is called before the first frame update
 	void Start()
     {
 		isGrabbed = false;
 		StarValue.text = numThrowingStars.ToString();
-		ninjaStar.SetActive(false);
-		sword.SetActive(false);
-
+		previousHandPosition = transform.parent.position;
 	}
 
 	// Update is called once per frame
 	void Update()
     {
-        //right as bool for push or not
-        float triggerValue = pinchAnimationAction.action.ReadValue<float>();
+		currentHandPosition = transform.parent.position;
+		velocity = (currentHandPosition - previousHandPosition) / Time.deltaTime;
+		velocity.Normalize();
+		//Debug.Log(velocity);
+		//right as bool for push or not
+		float triggerValue = pinchAnimationAction.action.ReadValue<float>();
         handAnimator.SetFloat("Trigger", triggerValue);
 
         float gripValue = gripAnimationAction.action.ReadValue<float>();
@@ -61,10 +67,13 @@ public class AnimateHandOnInput : MonoBehaviour
 		{
 			Debug.Log("star");
 			if (ninjaStar == null) return;
-			//instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
+			instantiatedPrefab = Instantiate(ninjaStar, transform.position, Quaternion.identity);
+
+			instantiatedPrefab.transform.parent = transform.parent.transform;
+			instantiatedPrefab.transform.SetLocalPositionAndRotation(ninjaStar.transform.position, ninjaStar.transform.rotation);
 			//gripPoint = instantiatedPrefab.transform.GetChild(0).position;
-			//instantiatedPrefab.transform.position = transform.position;
-			ninjaStar.SetActive(true);
+			//instantiatedPrefab.transform.position = gripPoint;
+
 			isGrabbed = true;
 		}
 
@@ -73,15 +82,21 @@ public class AnimateHandOnInput : MonoBehaviour
 			ThrowObject();
 			isGrabbed = false;
 		}
+		//log hand position to previous
+		previousHandPosition = transform.parent.position;
 
 	}
 
 	private void ThrowObject()
 	{
 		Debug.Log("thrown");
-		Rigidbody rb = ninjaStar.GetComponent<Rigidbody>();
-		throwingVelocity = rb.velocity;
+		Rigidbody rb = instantiatedPrefab.GetComponent<Rigidbody>();
+		//Rigidbody handRB = transform.parent.GetComponent<Rigidbody>();
+		//Vector3 velocity = handRB.velocity;
+		Debug.Log(velocity);
 		//rb.isKinematic = false;
-		rb.AddForce(throwingVelocity * throwForce, ForceMode.Impulse);
+		instantiatedPrefab.transform.parent = transform.parent.parent.parent.transform;
+		rb.AddForce(velocity * throwForce, ForceMode.Impulse);
+
 	}
 }

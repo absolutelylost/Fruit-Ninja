@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5606335256565745078}
   - component: {fileID: 5614995347918973090}
   - component: {fileID: -3029257078175128622}
-  - component: {fileID: 1264779816566754481}
+  - component: {fileID: 3232187568241320826}
   m_Layer: 0
   m_Name: Shuriken4
   m_TagString: Untagged
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5601616656068263890}
-  m_LocalRotation: {x: 0.30070576, y: -0, z: -0, w: 0.953717}
-  m_LocalPosition: {x: 3.1389303, y: 0.3805281, z: 2.8982964}
+  m_LocalRotation: {x: 0.63665825, y: 0.6766565, z: 0.33427605, w: 0.15830925}
+  m_LocalPosition: {x: -0.03389963, y: -0.020098474, z: -0.01440081}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100,7 +100,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f7be6201946cacf4c9368c1c2c4508c2, type: 3}
---- !u!54 &1264779816566754481
+--- !u!54 &3232187568241320826
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
