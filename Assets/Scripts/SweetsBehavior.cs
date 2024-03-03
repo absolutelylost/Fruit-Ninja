@@ -1,12 +1,13 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-public class Pickup : MonoBehaviour
+public class SweetsBehavior : MonoBehaviour
 {
-    // This function is called when another collider enters the trigger collider
-    //attached to this GameObject
-private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // Destroy the item after it's collision triggered
-        Destroy(gameObject);
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("They objects collided!!!");
+            Destroy(gameObject);
+        }
     }
 }
