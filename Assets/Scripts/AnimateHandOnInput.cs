@@ -17,6 +17,7 @@ public class AnimateHandOnInput : MonoBehaviour
 	private bool isGrabbed;
 	private GameObject instantiatedPrefab;
 	private float throwForce = 5.0f;
+	private Vector3 throwingVelocity;
 
 	// Start is called before the first frame update
 	void Start()
@@ -50,28 +51,32 @@ public class AnimateHandOnInput : MonoBehaviour
 		//active ninja star pinch
 		if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
 		{
-			instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
-			gripPoint = instantiatedPrefab.transform.GetChild(0).position;
-			instantiatedPrefab.transform.position = transform.position;
+			if (ninjaStar == null) return;
+			//instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
+			//gripPoint = instantiatedPrefab.transform.GetChild(0).position;
+			//instantiatedPrefab.transform.position = transform.position;
+			ninjaStar.SetActive(true);
 			isGrabbed = true;
-
+		}
+		else
+		{
+			if (ninjaStar == null) return;
+			ninjaStar.SetActive(false);
 		}
 
-		if(isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
+		if (isGrabbed && triggerValue <= 0.01f && gripValue >= 0.9f)
 		{
-			ThrowObject();
-			Debug.Log("gonna throw");
+			//ThrowObject();
 			isGrabbed = false;
-
 		}
 
 	}
 
 	private void ThrowObject()
 	{
-		Debug.Log("thrown");
-		Rigidbody rb = instantiatedPrefab.GetComponent<Rigidbody>();
+		Rigidbody rb = ninjaStar.GetComponent<Rigidbody>();
+		throwingVelocity = rb.velocity;
 		//rb.isKinematic = false;
-		rb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+		rb.AddForce(throwingVelocity * throwForce, ForceMode.Impulse);
 	}
 }
