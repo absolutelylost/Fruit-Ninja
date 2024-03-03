@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8441421424675163503}
   - component: {fileID: 8449408682324329359}
   - component: {fileID: 8457956276592178215}
-  - component: {fileID: 567584612248195761}
   - component: {fileID: 2018790053890387727}
+  - component: {fileID: 8177629594969693130}
   m_Layer: 0
   m_Name: strawberry
   m_TagString: Untagged
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &567584612248195761
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8444973030407593085}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.012801476, y: 0.01282423, z: 0.015927065}
-  m_Center: {x: 0.00009602611, y: -0.000020088159, z: -4.656612e-10}
 --- !u!114 &2018790053890387727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +97,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68ee82ad415db04c98edbf78a837acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruitAttack: {fileID: 0}
+  gameManager: {fileID: 7308001890725659041, guid: e7d20e6ec8e20924db837b5c96b95a6f, type: 3}
+--- !u!64 &8177629594969693130
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 3f4d2118f6a772542a1635ef5bfa6982, type: 3}

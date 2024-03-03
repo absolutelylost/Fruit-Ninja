@@ -13,7 +13,8 @@ public class Slicer : MonoBehaviour
 	//[SerializeField] public GameObject target;
 	//tracks Stats
 	[SerializeField] public GameObject XROrigin;
-    private MovementController Score;
+    [SerializeField] private GameObject gameManager;
+
 	public LayerMask sliceableLayer;
     
 
@@ -32,7 +33,6 @@ public class Slicer : MonoBehaviour
     {
         Material[] cutMaterials = Resources.LoadAll<Material>("CutMaterials");
         crossCutMaterials.AddRange(cutMaterials);
-        Score = XROrigin.GetComponent<MovementController>();
 	}
 
 	private void Update()
@@ -89,9 +89,9 @@ public class Slicer : MonoBehaviour
             SetupSlicedComponent(lowerhull);
 
 
-            // increase score
-            Score.Score += target.name.Length;
-            Destroy(target);
+			// increase score
+			gameManager.GetComponent<GameManager>().Score += gameObject.name.Length;
+			Destroy(target);
 
 		}
 	}

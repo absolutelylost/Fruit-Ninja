@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 1778181380}
   - component: {fileID: 1778181379}
   m_Layer: 5
-  m_Name: Ninja Star  Value
+  m_Name: Ninja Star Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,9 +1094,7 @@ MonoBehaviour:
   movementControllerHand: {fileID: 5541992472952314519}
   cc: {fileID: 7255035668211323604}
   healthSlider: {fileID: 3160702167862736944}
-  Scoring: {fileID: 183303253}
   freezeMovement: 0
-  Score: 0
   leftHandGripMoveAction:
     m_UseReference: 1
     m_Action:
@@ -1960,7 +1958,9 @@ MonoBehaviour:
   sword: {fileID: 0}
   ninjaStar: {fileID: 0}
   StarValue: {fileID: 1778181379}
+  headCamera: {fileID: 0}
   numThrowingStars: 15
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!95 &5579351382662567653 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 109434732388006827, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
@@ -2070,9 +2070,11 @@ MonoBehaviour:
     m_Reference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   handAnimator: {fileID: 144159328122434602}
   sword: {fileID: 2996822677687714807}
-  ninjaStar: {fileID: 0}
+  ninjaStar: {fileID: 5601616656068263890, guid: 2a2920211544bdc43ad7e4ded8e6226d, type: 3}
   StarValue: {fileID: 1778181379}
+  headCamera: {fileID: 5541992473623449077}
   numThrowingStars: 15
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!4 &144159328115170300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
