@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPresent: 0
-  spawnablePrefab: {fileID: 0}
+  spawnablePrefab: {fileID: 7097239331630043555, guid: 0645ea8867dccbe4a9d2e0ac67b04185, type: 3}
 --- !u!1001 &8569637645733934796
 PrefabInstance:
   m_ObjectHideFlags: 0
