@@ -11,14 +11,12 @@ public class MovementController : MonoBehaviour
 	[SerializeField] private GameObject movementControllerHand;
 	[SerializeField] private CharacterController cc;
 	[SerializeField] private Slider healthSlider;
-	[SerializeField] private TextMeshProUGUI Scoring;
 	[HideInInspector] public bool freezeMovement = false;
 
 
-	[HideInInspector] public int Score = 0;
 
 	public InputActionProperty leftHandGripMoveAction;
-	private float moveSpeed = 5.0f;
+	private float moveSpeed = 1.0f;
     private bool activeMovement;
 	private Vector3 startingHeadPosition;
 	private Vector3 currentHeadPosition;
@@ -63,7 +61,6 @@ public class MovementController : MonoBehaviour
     {
 		activeMovement = false;
 		startingHeadPosition = characterHead.transform.position;
-		Debug.Log(startingHeadPosition);
 	}
 
 	// Update is called once per frame
@@ -75,8 +72,6 @@ public class MovementController : MonoBehaviour
 			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 
-        //uopdate score
-        Scoring.text = Score.ToString();
 
 		float gripValue = leftHandGripMoveAction.action.ReadValue<float>();
 
@@ -97,6 +92,7 @@ public class MovementController : MonoBehaviour
 			Vector3 newPos = movementControllerHand.transform.position;
 
 			Vector3 forwardDirection = newPos - originHandPos;
+			forwardDirection.Normalize();
 
 			cc.SimpleMove(forwardDirection * moveSpeed);
 		}

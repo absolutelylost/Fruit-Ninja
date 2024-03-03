@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
+
 public class AnimateHandOnInput : MonoBehaviour
 {
 
@@ -15,6 +11,7 @@ public class AnimateHandOnInput : MonoBehaviour
 	[SerializeField] private GameObject sword;
 	[SerializeField] private GameObject ninjaStar;
 	[SerializeField] private TextMeshProUGUI StarValue;
+	[SerializeField] private GameObject headCamera;
 
 	private Vector3 gripPoint;
 	private bool isGrabbed = false;
@@ -22,22 +19,28 @@ public class AnimateHandOnInput : MonoBehaviour
 	private float throwForce = 5.0f;
 	private Vector3 throwingVelocity;
 	public int numThrowingStars;
+	public Vector3 velocity;
+	private Vector3 currentHandPosition;
+	private Vector3 previousHandPosition;
+
 
     // Start is called before the first frame update
     void Start()
     {
 		isGrabbed = false;
 		StarValue.text = numThrowingStars.ToString();
-		ninjaStar.SetActive(false);
-		sword.SetActive(false);
-
+		previousHandPosition = transform.parent.position;
 	}
 
 	// Update is called once per frame
 	void Update()
     {
-        //right as bool for push or not
-        float triggerValue = pinchAnimationAction.action.ReadValue<float>();
+		//update number of stas available
+		currentHandPosition = transform.parent.position;
+		velocity = (currentHandPosition - previousHandPosition) / Time.deltaTime;
+
+		//right as bool for push or not
+		float triggerValue = pinchAnimationAction.action.ReadValue<float>();
         handAnimator.SetFloat("Trigger", triggerValue);
 
         float gripValue = gripAnimationAction.action.ReadValue<float>();
@@ -59,13 +62,20 @@ public class AnimateHandOnInput : MonoBehaviour
 		//active ninja star pinch
 		if (!isGrabbed && triggerValue > 0.9f && gripValue < 0.1f && ninjaStar != null)
 		{
-			Debug.Log("star");
 			if (ninjaStar == null) return;
-			//instantiatedPrefab = Instantiate(ninjaStar, transform.position, transform.rotation);
-			//gripPoint = instantiatedPrefab.transform.GetChild(0).position;
-			//instantiatedPrefab.transform.position = transform.position;
-			ninjaStar.SetActive(true);
-			isGrabbed = true;
+			if(numThrowingStars > 0)
+			{
+				instantiatedPrefab = Instantiate(ninjaStar, transform.position, Quaternion.identity);
+				instantiatedPrefab.transform.parent = transform.parent.transform;
+				instantiatedPrefab.transform.SetLocalPositionAndRotation(ninjaStar.transform.position, ninjaStar.transform.rotation);
+				
+				isGrabbed = true;
+				numThrowingStars--;
+				Debug.Log(StarValue.text);
+				StarValue.text = numThrowingStars.ToString();
+				Debug.Log(numThrowingStars.ToString());
+
+			}
 		}
 
 		if (isGrabbed && triggerValue <= 0.01f && gripValue <= 0.1f)
@@ -73,15 +83,26 @@ public class AnimateHandOnInput : MonoBehaviour
 			ThrowObject();
 			isGrabbed = false;
 		}
+		//log hand position to previous
+		previousHandPosition = transform.parent.position;
 
 	}
 
 	private void ThrowObject()
 	{
-		Debug.Log("thrown");
-		Rigidbody rb = ninjaStar.GetComponent<Rigidbody>();
-		throwingVelocity = rb.velocity;
-		//rb.isKinematic = false;
-		rb.AddForce(throwingVelocity * throwForce, ForceMode.Impulse);
+		Rigidbody rb = instantiatedPrefab.GetComponent<Rigidbody>();
+		instantiatedPrefab.transform.parent = transform.parent.parent.parent.transform;
+		instantiatedPrefab.transform.rotation = headCamera.transform.rotation;
+
+		if(velocity.magnitude > 2)
+		{
+			rb.AddForce(headCamera.transform.forward * velocity.magnitude, ForceMode.Impulse);
+			instantiatedPrefab.GetComponent<StarBehavior>().StartTimer();
+		}
+		else
+		{
+			rb.useGravity = true;
+		}
+
 	}
 }

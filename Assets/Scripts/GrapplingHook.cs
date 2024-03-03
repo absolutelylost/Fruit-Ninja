@@ -96,7 +96,6 @@ public class GrapplingHook : MonoBehaviour
 
         if (isGrappling)
         {
-            Debug.Log("moving fruit");
             //Vector3 direction = (lockedGrapplePoint - transform.position).normalized;
 			hitInfo.transform.position = Vector3.MoveTowards(hitInfo.transform.position, transform.position, grapplingSpeed * Time.deltaTime);
 		}

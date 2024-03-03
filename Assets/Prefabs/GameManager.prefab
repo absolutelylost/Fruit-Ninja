@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8813827596801424249
+--- !u!1 &7308001890725659041
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8813827596801424248}
-  - component: {fileID: 8813827596801424251}
+  - component: {fileID: 6993938835704041721}
+  - component: {fileID: 8524601174273096699}
   m_Layer: 0
-  m_Name: Cake Holder
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8813827596801424248
+--- !u!4 &6993938835704041721
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8813827596801424249}
-  m_LocalRotation: {x: 0, y: -0.014764964, z: 0, w: 0.999891}
-  m_LocalPosition: {x: 0, y: 1.175, z: -0.514}
+  m_GameObject: {fileID: 7308001890725659041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.068183996, y: 1.2829767, z: -1.0795466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -1.692, z: 0}
---- !u!114 &8813827596801424251
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8524601174273096699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8813827596801424249}
+  m_GameObject: {fileID: 7308001890725659041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803bb6315693baa4380da6fcd1646ba8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fc4bd802e5343c47b9a242a86156a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresent: 0
-  spawnablePrefab: {fileID: 7097239331630043555, guid: 0645ea8867dccbe4a9d2e0ac67b04185, type: 3}
+  Score: 0
+  Scoring: {fileID: 0}
