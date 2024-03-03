@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SweetCollisionHandler : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SweetCollisionHandler : MonoBehaviour
         // Check if the collided GameObject has a specific tag or name
         if (collision.gameObject.CompareTag("Collectable"))
         {
+            Debug.Log("Am I colliding?");
             // Destroy the collided GameObject
             Destroy(collision.gameObject);
         }
