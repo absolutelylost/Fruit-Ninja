@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class GrapplingHook : MonoBehaviour
 {
 	public InputActionProperty pinchAnimationAction;
 	public InputActionProperty gripAnimationAction;
-    public InputActionProperty xyButtonPress;
+	public InputActionProperty xButtonPress;
+	public InputActionProperty yButtonPress;
 
-    [SerializeField] private GameObject xrOrigin;
+	[SerializeField] private GameObject xrOrigin;
 	[SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private GameObject grappleHand;
     public LayerMask grappleable;
     public GameObject grappleTargetImage;
     private GameObject marker;
 	public float grapplingDelayTime;
-    private Vector3 grapplePoint;
-    private bool isGrappling = false;
+	private Vector3 grapplePoint;
+	private Vector3 lockedGrapplePoint;
+	private bool isGrappling = false;
     private bool grapplingSelect = false;
 	private float grapplingTime = 0;
-	private float grapplingTimeLimit = 3;
-	private float grapplingSpeed = 3.0f;
+	private float grapplingTimeLimit = 2;
+	private float grapplingSpeed = 5.0f;
 
 
 	// Start is called before the first frame update
@@ -38,8 +41,10 @@ public class GrapplingHook : MonoBehaviour
 		float triggerValue = pinchAnimationAction.action.ReadValue<float>();
 
 		float gripValue = gripAnimationAction.action.ReadValue<float>();
-        
-        bool xyIsPressed = xyButtonPress.action.IsPressed();
+
+		bool xIsPressed = xButtonPress.action.IsPressed();
+		bool yIsPressed = yButtonPress.action.IsPressed();
+
         // if time runs out reset timer and stop grapple selection
         CheckStopGrappleSelect();
 
@@ -62,21 +67,21 @@ public class GrapplingHook : MonoBehaviour
                 {
                     ActivateGrappleLine(hitInfo);
 				}
-                else if (triggerValue < .1f && isGrappling && grapplingSelect)
+                else if (triggerValue < .1f && grapplingSelect)
                 {
                     grapplingSelect = false;
-
+                    isGrappling = false;
 					lineRenderer.enabled = false;
-
 				}
 				//keep grappling connected to hand
 				if (grapplingSelect)
                 {
                     StartGrappleSelect();
-                    if (xyIsPressed)
+                    if (xIsPressed || yIsPressed)
                     {
-                        //restart grapple time
-                        grapplingTime = 0;
+						lockedGrapplePoint = grapplePoint;
+						//restart grapple time
+						grapplingTime = 0;
                         isGrappling = true;
 
 					}
@@ -86,13 +91,16 @@ public class GrapplingHook : MonoBehaviour
         else
         {
            Destroy(marker);
-        }
+            lineRenderer.enabled = false;
+		}
 
         if (isGrappling)
         {
-            xrOrigin.transform.position = Vector3.Lerp(xrOrigin.transform.position, grapplePoint, grapplingSpeed * Time.deltaTime);
-        }
-    }
+            Debug.Log("moving fruit");
+            //Vector3 direction = (lockedGrapplePoint - transform.position).normalized;
+			hitInfo.transform.position = Vector3.MoveTowards(hitInfo.transform.position, transform.position, grapplingSpeed * Time.deltaTime);
+		}
+	}
 
     public void ActivateGrappleLine(RaycastHit hitInfo)
     {
