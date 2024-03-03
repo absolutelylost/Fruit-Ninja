@@ -14,43 +14,44 @@ public class FruitBehavior : MonoBehaviour
 
 	[SerializeField] private GameObject fruitAttack;
 
-	private void OnCollisionEnter(Collision collision)
-	{
-		Debug.Log("hit");
-		//strikePoints[0] = collision.contacts[0].point;
-		Debug.Log(collision.contactCount);
-		Debug.Log(collision.collider.transform.name);
-		if(collision.collider.transform.name == "Sword")
-		{
-			hitPoints -= 2;
-			Debug.Log("hit with sword. remaining health: " + hitPoints);
-		}
-		if (collision.collider.transform.name == "Shuriken4")
-		{
-			hitPoints -= 1;
-			Debug.Log("hit with star");
-			Debug.Log("hit with star. remaining health: " + hitPoints);
-		}
-		if (hitPoints <= 0)
-		{
-			Debug.Log("destroy object");
-			Destroy(gameObject);
-		}
-	}
-	private void OnCollisionExit(Collision collision)
-	{
-		Debug.Log("leaving object");
-		Debug.Log(collision.contactCount);
-		if (collision.contactCount >= 1)
-		{
-			strikePoints[1] = collision.contacts[0].point;
+	//actually not used here
+	//private void OnCollisionEnter(Collision collision)
+	//{
+	//	Debug.Log("hit");
+	//	//strikePoints[0] = collision.contacts[0].point;
+	//	Debug.Log(collision.contactCount);
+	//	Debug.Log(collision.collider.transform.name);
+	//	if(collision.collider.transform.name == "Sword")
+	//	{
+	//		hitPoints -= 2;
+	//		Debug.Log("hit with sword. remaining health: " + hitPoints);
+	//	}
+	//	if (collision.collider.transform.name == "Shuriken4")
+	//	{
+	//		hitPoints -= 1;
+	//		Debug.Log("hit with star");
+	//		Debug.Log("hit with star. remaining health: " + hitPoints);
+	//	}
+	//	if (hitPoints <= 0)
+	//	{
+	//		Debug.Log("destroy object");
+	//		Destroy(gameObject);
+	//	}
+	//}
+	//private void OnCollisionExit(Collision collision)
+	//{
+	//	Debug.Log("leaving object");
+	//	Debug.Log(collision.contactCount);
+	//	if (collision.contactCount >= 1)
+	//	{
+	//		strikePoints[1] = collision.contacts[0].point;
 
-			Debug.DrawLine(strikePoints[0], strikePoints[1], Color.red);
+	//		Debug.DrawLine(strikePoints[0], strikePoints[1], Color.red);
 
-			strikePoints = new Vector3[strikePoints.Length];
+	//		strikePoints = new Vector3[strikePoints.Length];
 
-		}
-	}
+	//	}
+	//}
 
 	// Start is called before the first frame update
 	void Start()
