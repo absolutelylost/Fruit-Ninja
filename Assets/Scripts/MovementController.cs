@@ -12,6 +12,7 @@ public class MovementController : MonoBehaviour
 	[SerializeField] private CharacterController cc;
 	[SerializeField] private Slider healthSlider;
 	[SerializeField] private TextMeshProUGUI Scoring;
+	[HideInInspector] public bool freezeMovement = false;
 
 
 	[HideInInspector] public int Score = 0;
@@ -68,8 +69,14 @@ public class MovementController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-		//uopdate score
-		Scoring.text = Score.ToString();
+
+        if (freezeMovement)
+		{
+			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		}
+
+        //uopdate score
+        Scoring.text = Score.ToString();
 
 		float gripValue = leftHandGripMoveAction.action.ReadValue<float>();
 
