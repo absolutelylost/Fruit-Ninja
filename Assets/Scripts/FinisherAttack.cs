@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows.Speech;
 
 public class FinisherAttack : MonoBehaviour
 {
@@ -9,13 +10,26 @@ public class FinisherAttack : MonoBehaviour
     private Color targetColor = Color.gray;
     private float colorChangeSpeed = 0.5f;
 
-    private bool finisherInProgress = false;
+	private string phrase = "Fruit gods";
+	private DictationRecognizer recognizer;
+
+	private bool finisherInProgress = false;
     [SerializeField] private GameObject enemyFruit;
     private List<GameObject> fruits;
     // Start is called before the first frame update
     void Start()
     {
-        fruits = new List<GameObject>();
+		// Initialize the DictationRecognizer
+		recognizer = new DictationRecognizer();
+
+		// Register the dictation recognizer
+		recognizer.DictationResult += Recognizer_DictationResult;
+		recognizer.DictationError += Recognizer_DictationError;
+
+		// Start dictation recognition
+		recognizer.Start();
+
+		fruits = new List<GameObject>();
         for (int i = 0; i < enemyFruit.transform.childCount; i++)
         {
             //Debug.Log(enemyFruit.transform.GetChild(0).name);
@@ -24,8 +38,18 @@ public class FinisherAttack : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+	void OnDestroy()
+	{
+		// Cleanup
+		if (recognizer != null)
+		{
+			recognizer.Stop();
+			recognizer.Dispose();
+		}
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         //if (Keyboard.current.spaceKey.wasPressedThisFrame)
         //{
@@ -68,4 +92,27 @@ public class FinisherAttack : MonoBehaviour
 
 
     }
+
+	void Recognizer_DictationResult(string text, ConfidenceLevel confidence)
+	{
+		Debug.Log("checking recognition");
+		// Check if recognized text contains the desired phrase
+		if (text.ToLower().Contains(phrase.ToLower()))
+		{
+			// Trigger an event or execute desired action
+			Debug.Log("Phrase recognized: " + text);
+            if (confidence > 0) 
+            {
+				FinisherMoveAction();
+
+			}
+			// Place your event triggering code here
+		}
+	}
+
+	void Recognizer_DictationError(string error, int hresult)
+	{
+		Debug.LogError("Dictation error: " + error);
+	}
+
 }

@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[HideInInspector] public int Score = 0;
+	public int Score;
 	[SerializeField] private TextMeshProUGUI Scoring;
 
 	// Start is called before the first frame update
 	void Start()
     {
-        
+        Score = 0;
     }
 
     // Update is called once per frame

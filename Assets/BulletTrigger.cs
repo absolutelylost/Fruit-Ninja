@@ -4,11 +4,33 @@ using UnityEngine;
 
 public class BulletTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+
+    public float enemySpeed;
+
+	private void Start()
+	{
+
+	}
+	private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+		if(other.gameObject.tag == "Obstacle")
+		{
+			//Debug.Log("trigger: " + other.gameObject.tag);
+			Destroy(gameObject);
+
+		}
+		//if (other.gameObject.tag == "Player")
+  //      {
+  //          Destroy(gameObject);
+  //      }
+		if (other.gameObject.name.Contains("Sword"))
         {
-            Destroy(gameObject);
-        }
-    }
+			//Debug.Log("connected: " + other.gameObject.name);
+			gameObject.GetComponent<Rigidbody>().AddForce(-gameObject.transform.up * enemySpeed);
+		}
+
+
+
+
+	}
 }

@@ -76,7 +76,7 @@ public class Slicer : MonoBehaviour
         // SlicedHull hull = target.Slice(planeDebug.position, planeDebug.up);
 
 		// find material based on name of object cut
-		Material cutMaterial = crossCutMaterials.Find(x => x.name == target.name);
+		Material cutMaterial = crossCutMaterials.Find(x => target.name.Contains(x.name));
 
         //create sections and assign components
 		if (hull != null)
@@ -89,7 +89,7 @@ public class Slicer : MonoBehaviour
             SetupSlicedComponent(lowerhull);
 
 
-			// increase score
+            // increase score
 			gameManager.GetComponent<GameManager>().Score += gameObject.name.Length;
 			Destroy(target);
 

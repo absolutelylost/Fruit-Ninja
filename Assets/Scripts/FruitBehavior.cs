@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class FruitBehavior : MonoBehaviour
 {
@@ -14,24 +8,24 @@ public class FruitBehavior : MonoBehaviour
 	private Vector3[] strikePointsNormals;
 	private Vector3 movementDirection;
 
-	[SerializeField] private GameObject fruitAttack;
 	[SerializeField] private GameObject gameManager;
+	public bool isGrabbed = false;
 
 	//actually not used here
 	private void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log("hit");
-		//strikePoints[0] = collision.contacts[0].point;
-		Debug.Log(collision.contactCount);
-		Debug.Log(collision.collider.transform.name);
+		//Debug.Log("hit");
+		////strikePoints[0] = collision.contacts[0].point;
+		//Debug.Log(collision.contactCount);
+		//Debug.Log(collision.collider.transform.name);
 
 		if (collision.collider.transform.name.Contains("Shuriken"))
 		{
 			hitPoints -= 1;
-			Debug.Log("hit with star");
-			Debug.Log("hit with star. remaining health: " + hitPoints);
+			//Debug.Log("hit with star");
+			//Debug.Log("hit with star. remaining health: " + hitPoints);
 			collision.collider.transform.transform.parent = gameObject.transform;
-			Debug.Log(collision.collider.transform.parent.name);
+			//Debug.Log(collision.collider.transform.parent.name);
 
 			//collision.collider.transform.position = collision.contacts[0].point;
 			collision.collider.GetComponent<StarBehavior>().isThrown = false;
@@ -40,7 +34,7 @@ public class FruitBehavior : MonoBehaviour
 		}
 		if (hitPoints <= 0)
 		{
-			Debug.Log("destroy object");
+			Debug.Log(gameObject.name.Length);
 			gameManager.GetComponent<GameManager>().Score += gameObject.name.Length;
 			
 			Destroy(gameObject);

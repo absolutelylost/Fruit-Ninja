@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &86827557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86827558}
+  m_Layer: 6
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &86827558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86827557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6976426791073645430}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6973091278437808500
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +44,8 @@ GameObject:
   - component: {fileID: 6959591580142716482}
   - component: {fileID: 6972056606707232010}
   - component: {fileID: 1360388979014446596}
+  - component: {fileID: 1473465554}
+  - component: {fileID: 1718195033}
   m_Layer: 6
   m_Name: avocado
   m_TagString: Untagged
@@ -29,9 +62,10 @@ Transform:
   m_GameObject: {fileID: 6973091278437808500}
   m_LocalRotation: {x: 0, y: 0.7069834, z: 0.7072302, w: 0}
   m_LocalPosition: {x: -0.04695473, y: 1.39, z: 2.03}
-  m_LocalScale: {x: 50.000023, y: 50, z: 50}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 86827558}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 180}
@@ -97,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68ee82ad415db04c98edbf78a837acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitAttack: {fileID: 9113941964308361851, guid: 40d3a2a1e66b69f4f9c2a42c969d5112, type: 3}
-  gameManager: {fileID: 7308001890725659041, guid: e7d20e6ec8e20924db837b5c96b95a6f, type: 3}
+  gameManager: {fileID: 0}
+  isGrabbed: 0
 --- !u!64 &1360388979014446596
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113,3 +147,35 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 3f4d2118f6a772542a1635ef5bfa6982, type: 3}
+--- !u!114 &1473465554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6973091278437808500}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0255121c1a7325b45925a219b34f9011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 9113941964308361851, guid: 40d3a2a1e66b69f4f9c2a42c969d5112, type: 3}
+  firePoint: {fileID: 0}
+  projectileForce: 1000
+--- !u!114 &1718195033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6973091278437808500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6714df76b1745f44085210e6107c8aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 5
+  enemyBullet: {fileID: 8375863935108894161, guid: 9fed032cc6dbda74eb8cd60d98f308fc, type: 3}
+  spawnPoint: {fileID: 86827558}
+  enemySpeed: 1000
+  isGrabbed: 0

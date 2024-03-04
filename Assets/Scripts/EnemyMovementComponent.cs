@@ -40,12 +40,12 @@ public class EnemyMovementComponent : MonoBehaviour
                 // If an obstacle is hit, the player is not in line of sight
                 if (hit.collider.gameObject.CompareTag("Obstacle"))
                 {
-                    Debug.Log("I got here first!!!!!");
+                    //Debug.Log("I got here first!!!!!");
                     return false; // Player is in line of sight
                 }
                 if (hit.collider.gameObject.CompareTag("Player"))
                 {
-                    Debug.Log("I got here finally!!!!!");
+                    //Debug.Log("I got here finally!!!!!");
                     return true; // Player is in line of sight
                 }
             }

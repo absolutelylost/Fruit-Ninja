@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1075167384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075167385}
+  m_Layer: 6
+  m_Name: SpawnPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075167385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075167384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0108, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8441421424675163503}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1550557193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1550557194}
+  m_Layer: 6
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1550557194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550557193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0108, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8441421424675163503}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8444973030407593085
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +75,12 @@ GameObject:
   - component: {fileID: 8457956276592178215}
   - component: {fileID: 2018790053890387727}
   - component: {fileID: 8177629594969693130}
-  m_Layer: 0
+  - component: {fileID: 10867197}
+  - component: {fileID: 1583038595}
+  - component: {fileID: 1397500576646083473}
+  - component: {fileID: 920411948}
+  - component: {fileID: 920411949}
+  m_Layer: 6
   m_Name: strawberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,14 +94,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8444973030407593085}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 3.56, y: 1.449, z: -0.757}
-  m_LocalScale: {x: 50, y: 50, z: 50}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1550557194}
+  - {fileID: 1075167385}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &8449408682324329359
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68ee82ad415db04c98edbf78a837acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitAttack: {fileID: 0}
-  gameManager: {fileID: 7308001890725659041, guid: e7d20e6ec8e20924db837b5c96b95a6f, type: 3}
+  gameManager: {fileID: 0}
+  isGrabbed: 0
 --- !u!64 &8177629594969693130
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113,3 +182,94 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: 3f4d2118f6a772542a1635ef5bfa6982, type: 3}
+--- !u!114 &10867197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8252521cdc512b945af6e09f26765654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  lineOfSightDistance: 20
+--- !u!114 &1583038595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8252521cdc512b945af6e09f26765654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  lineOfSightDistance: 20
+--- !u!114 &1397500576646083473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61d8a8351cc5254e8fc602fbbd78638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 4
+  enemyBullet: {fileID: 3643423484014536084, guid: e1bbb07b3ac1ad845bbb5ebe1c76e150, type: 3}
+  spawnPoint1: {fileID: 1550557194}
+  spawnPoint2: {fileID: 1075167385}
+  enemySpeed: 200
+  isGrabbed: 0
+--- !u!114 &920411948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8252521cdc512b945af6e09f26765654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  lineOfSightDistance: 20
+--- !u!195 &920411949
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444973030407593085}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.007963533
+  m_Speed: 5
+  m_Acceleration: 1
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.012784054
+  m_BaseOffset: 0.006392027
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

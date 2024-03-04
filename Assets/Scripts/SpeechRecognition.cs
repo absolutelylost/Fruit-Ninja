@@ -17,6 +17,7 @@ public class SpeechRecognition : MonoBehaviour
 
         // Start dictation recognition
         recognizer.Start();
+
     }
 
     void OnDestroy()
@@ -31,6 +32,7 @@ public class SpeechRecognition : MonoBehaviour
 
     void Recognizer_DictationResult(string text, ConfidenceLevel confidence)
     {
+        Debug.Log("checking recognition");
         // Check if recognized text contains the desired phrase
         if (text.ToLower().Contains(phrase.ToLower()))
         {
